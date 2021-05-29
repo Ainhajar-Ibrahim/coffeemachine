@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main implements fromuser,touser {
     private static int price;
     private static int money1;
-
+    static signal  message = new signal(100);
     public static int getNb() {
         return nb;
     }
@@ -16,23 +16,25 @@ public class Main implements fromuser,touser {
     }
 
     private static int nb;
-    private static String signal;
 
-    public static String getSignal() {
-        return signal;
+    public static int getNbc() {
+        return nbc;
     }
 
-    public static void setSignal(String signal) {
-        Main.signal = signal;
+    public static void setNbc(int nbc) {
+        Main.nbc = nbc;
     }
+
+    private static int nbc=0;
+
 
     public static void main(String[] args) throws InterruptedException {
         nb=touser.showMenu();
         money1=fromuser.insertCoin();
 
 
-        controller c = new controller();
-        hardware h = new hardware();
+        controller c = new controller(message);
+        hardware h = new hardware(message);
 
             switch(nb){
                 case 1:{
@@ -45,22 +47,70 @@ public class Main implements fromuser,touser {
                             touser.returnChange(money1,price);
                             touser.showMenu();
                             break;
+
+
                         case 10:
                             price=10;
+                            nbc=touser.showCoffeeMenu();
+
                             System.out.println("your coffee will be ready in no time");
-                            c.run();
+                            h.start();
+                            c.start();
+
+
                             break;
 
-                        default: System.out.println("wrong choice1");
-                                 break;
+
+
+                        default:
+                            price=0;
+                            System.out.println("you can only insert 5 or 10");
+                            touser.returnChange(money1,price);
+                            touser.showMenu();
+                            break;
+
                     }
+
                     break;}
 
                 case 2:
-                    System.out.println("9hwa");
-                    break;
+                {
+
+                    switch(money1){
+
+
+                        case 5:
+                            price=5;
+                            System.out.println("your tea will be ready in no time");
+                            h.start();
+                            c.start();
+                            break;
+
+
+
+                        case 10:
+                            price=5;
+                            System.out.println("your tea will be ready in no time");
+                            touser.returnChange(money1,price);
+                            h.start();
+                            c.start();
+                            break;
+
+
+
+                        default:
+                            price=0;
+                            System.out.println("you can only insert 5 or 10");
+                            touser.returnChange(money1,price);
+                            touser.showMenu();
+                            break;
+                    }
+
+                    break;}
+
+
                 default:
-                    System.out.println("9awed");
+                    System.out.println("unknown command");
                     break;
 
 
