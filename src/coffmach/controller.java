@@ -1,9 +1,8 @@
 package coffmach;
 
 
-
 public class controller extends Thread  {
-    signal s;
+    final signal s;
 
     public controller(signal m) {
         this.s=m;
@@ -26,15 +25,9 @@ public class controller extends Thread  {
                 System.out.println(s.getMessage()+"water has been filled");
                 if(s.getMessage() == signal.OK_WATER){
 
-                    switch (Main.getNb()){
-
-                        case 1: send(s, signal.FILL_COFFEE);
-                            break;
-                        case 2: send(s, signal.HEAT_WATER);
-                            break;
-
-
-
+                    switch (Main.getNb()) {
+                        case 1 -> send(s, signal.FILL_COFFEE);
+                        case 2 -> send(s, signal.HEAT_WATER);
                     }
                 }
 
@@ -55,31 +48,18 @@ public class controller extends Thread  {
                 e.printStackTrace();
             }
 
-            switch(Main.getNbc()){
-                case 0:
-                    System.out.println("please wait");
-                    break;
-                case 1: send(s, signal.ADD_MILK);
-                    break;
-                case 2: send(s, signal.ADD_SUGAR);
-                    break;
-                case 3:{
-                    send(s,signal.ADD_BOTH);
-                  break;
-                }
-
-                case 4:
-                    System.out.println("a regular coffee with no additions");
-                    break;
-
-                default:
-                    System.out.println("unknown command ");
-                    break;
+            switch (Main.getNbc()) {
+                case 0 -> System.out.println("please wait");
+                case 1 -> send(s, signal.ADD_MILK);
+                case 2 -> send(s, signal.ADD_SUGAR);
+                case 3 -> send(s, signal.ADD_BOTH);
+                case 4 -> System.out.println("a regular coffee with no additions");
+                default -> System.out.println("unknown command ");
             }
 
-
             try {
-                s.wait();
+                s.wait(200);
+
                 System.out.println(s.getMessage());
 
 
@@ -106,5 +86,6 @@ public class controller extends Thread  {
         s.setMessage(c);
         s.notify();
     }
+
 
 }

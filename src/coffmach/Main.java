@@ -1,5 +1,7 @@
 package coffmach;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
@@ -28,12 +30,14 @@ public class Main implements fromuser,touser {
     }
 
     private static int nbc = 0;
+    static ArrayList<String> ourList= new ArrayList<>();
     static boolean restart = true;
 
 
     public static void main(String[] args) throws InterruptedException {
         while (restart) {
             nb = touser.showMenu();
+            if(nb==2){ourList.add("tea at "+LocalTime.now());}
             money1 = fromuser.insertCoin();
 
 
@@ -54,9 +58,12 @@ public class Main implements fromuser,touser {
                         case 10 -> {
                             price = 10;
                             nbc = touser.showCoffeeMenu();
+                            /*To add the command to the list*/
+                            ourList.add("coffee with option "+nbc+" at "+ LocalTime.now());
                             System.out.println("your coffee will be ready in no time");
                             h.start();
                             c.start();
+
                         }
                         default -> {
                             price = 0;
@@ -107,7 +114,7 @@ public class Main implements fromuser,touser {
                 default -> System.out.println("unknown command");
             }
             try {
-                Thread.sleep(500); // In your case it would be: Thread.sleep(100);
+                Thread.sleep(800);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -115,8 +122,10 @@ public class Main implements fromuser,touser {
             System.out.println("1..........Yes");
             System.out.println("0..........No");
             Scanner clavier=new Scanner(System.in);
-            int nb=clavier.nextInt();
-            if(nb==0){
+            int saisie=clavier.nextInt();
+            if(saisie==0){
+                System.out.println("You had:");
+                touser.listofcommande(ourList);
                 System.out.println("Have a nice day");
                 exit(0); }
 

@@ -16,7 +16,7 @@ public class hardware extends Thread   {
         synchronized (s){
 
             try {
-                s.wait();
+                s.wait(200);
                 System.out.println(s.getMessage());
                 send(s,signal.OK_WATER);
             } catch (InterruptedException e) {

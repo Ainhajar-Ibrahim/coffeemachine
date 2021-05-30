@@ -1,13 +1,14 @@
 package coffmach;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public interface touser {
-    public static void returnChange(int money1,int price){
+    static void returnChange(int money1, int price){
         int change=money1-price;
         System.out.println("Here is your change: "+change);
     }
-    public static int showMenu(){
+    static int showMenu(){
         System.out.println("\n** Coffee Machine **\n");
         System.out.println(" Make your choice\n") ;
         System.out.println("1. regular Coffee ...........(10 Dhs)\n") ;
@@ -16,7 +17,7 @@ public interface touser {
         int nb=clavier.nextInt();
         return nb;
     }
-    public static int showCoffeeMenu(){
+    static int showCoffeeMenu(){
         System.out.println("\n** Coffee Machine **\n");
         System.out.println(" Make your choice\n") ;
         System.out.println("1. Milk.........\n") ;
@@ -26,6 +27,12 @@ public interface touser {
         Scanner clavier=new Scanner(System.in);
         int nbc=clavier.nextInt();
         return nbc;
+    }
+    static void listofcommande(ArrayList<String> ourlist){
+        for (Object ele:ourlist
+        ) {
+            System.out.println(ele);
+        }
     }
 
 }
