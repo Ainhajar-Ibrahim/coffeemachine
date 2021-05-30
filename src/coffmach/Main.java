@@ -7,7 +7,6 @@ import java.util.Scanner;
 import static java.lang.System.exit;
 
 public class Main implements fromuser,touser {
-    private static int price;
     private static int money1;
     static signal message = new signal(100);
 
@@ -15,9 +14,6 @@ public class Main implements fromuser,touser {
         return nb;
     }
 
-    public static void setNb(int nb) {
-        Main.nb = nb;
-    }
 
     private static int nb;
 
@@ -25,16 +21,13 @@ public class Main implements fromuser,touser {
         return nbc;
     }
 
-    public static void setNbc(int nbc) {
-        Main.nbc = nbc;
-    }
 
     private static int nbc = 0;
     static ArrayList<String> ourList= new ArrayList<>();
     static boolean restart = true;
 
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         while (restart) {
             nb = touser.showMenu();
             if(nb==2){ourList.add("tea at "+LocalTime.now());}
@@ -44,6 +37,7 @@ public class Main implements fromuser,touser {
             controller c = new controller(message);
             hardware h = new hardware(message);
 
+            int price;
             switch (nb) {
                 case 1 -> {
 
@@ -53,10 +47,8 @@ public class Main implements fromuser,touser {
                             price = 0;
                             System.out.println("not enough money");
                             touser.returnChange(money1, price);
-                            touser.showMenu();
                         }
                         case 10 -> {
-                            price = 10;
                             nbc = touser.showCoffeeMenu();
                             /*To add the command to the list*/
                             ourList.add("coffee with option "+nbc+" at "+ LocalTime.now());
@@ -78,7 +70,6 @@ public class Main implements fromuser,touser {
 
                     switch (money1) {
                         case 5 -> {
-                            price = 5;
                             System.out.println("your tea will be ready in no time");
                             h.start();
                             c.start();
@@ -124,6 +115,8 @@ public class Main implements fromuser,touser {
             Scanner clavier=new Scanner(System.in);
             int saisie=clavier.nextInt();
             if(saisie==0){
+                if(ourList.isEmpty()){
+                    System.out.println("Have a nice day");exit(0);}
                 System.out.println("You had:");
                 touser.listofcommande(ourList);
                 System.out.println("Have a nice day");
