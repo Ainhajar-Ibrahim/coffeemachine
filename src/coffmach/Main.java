@@ -74,7 +74,7 @@ public class Main implements fromuser,touser {
                     }
 
                 }
-                case 2 -> {
+                case 2 -> {nbc=0;
 
                     switch (money1) {
                         case 5 -> {
