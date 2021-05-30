@@ -1,5 +1,4 @@
 package coffmach;
-import coffmach.signal;
 
 public class hardware extends Thread   {
 
@@ -56,10 +55,6 @@ public class hardware extends Thread   {
                     case signal.ADD_SUGAR -> {
                         send(s, signal.SUGAR_OK);
                         System.out.println("sugar has been added");
-                    }
-                    case signal.ADD_BOTH -> {
-                        send(s, signal.BOTH_OK);
-                        System.out.println("sugar and milk have been added");
                     }
                 }
 

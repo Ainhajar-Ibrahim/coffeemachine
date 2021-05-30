@@ -7,7 +7,6 @@ import java.util.Scanner;
 import static java.lang.System.exit;
 
 public class Main implements fromuser,touser {
-    private static int money1;
     static signal message = new signal(100);
 
     public static int getNb() {
@@ -31,7 +30,7 @@ public class Main implements fromuser,touser {
         while (restart) {
             nb = touser.showMenu();
             if(nb==2){ourList.add("tea at "+LocalTime.now());}
-            money1 = fromuser.insertCoin();
+            int money1 = fromuser.insertCoin();
 
 
             controller c = new controller(message);
@@ -61,7 +60,6 @@ public class Main implements fromuser,touser {
                             price = 0;
                             System.out.println("you can only insert 5 or 10");
                             touser.returnChange(money1, price);
-                            touser.showMenu();
                         }
                     }
 
