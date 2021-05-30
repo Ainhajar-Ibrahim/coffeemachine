@@ -62,14 +62,15 @@ public class hardware extends Thread   {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            if(Main.getNbc()==3) {
+                try {
+                    s.wait();
+                    System.out.println(s.getMessage());
+                    send(s, signal.SUGAR_OK);
 
-            try {
-                s.wait();
-                System.out.println(s.getMessage());
-                send(s,signal.SUGAR_OK);
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
 
