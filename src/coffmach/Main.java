@@ -84,6 +84,12 @@ public class Main implements fromuser,touser {
                             System.out.println("your tea will be ready in no time");
                             h.start();
                             c.start();
+                            try {
+                                Thread.sleep(400); // In your case it would be: Thread.sleep(100);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                           System.out.println("tea is ready!");
                             break;
 
 
@@ -94,6 +100,12 @@ public class Main implements fromuser,touser {
                             touser.returnChange(money1,price);
                             h.start();
                             c.start();
+                            try {
+                                Thread.sleep(400); // In your case it would be: Thread.sleep(100);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println("tea is ready!");
                             break;
 
 
