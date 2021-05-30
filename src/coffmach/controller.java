@@ -22,7 +22,8 @@ public class controller extends Thread  {
 
             try {
                 s.wait();
-                System.out.println(s.getMessage()+"water has been filled");
+                System.out.println(s.getMessage());
+                System.out.println("water has been filled");
                 if(s.getMessage() == signal.OK_WATER){
 
                     switch (Main.getNb()) {
@@ -39,11 +40,6 @@ public class controller extends Thread  {
                 System.out.println(s.getMessage());
 
 
-
-
-
-
-
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -52,7 +48,22 @@ public class controller extends Thread  {
                 case 0 -> System.out.println("please wait");
                 case 1 -> send(s, signal.ADD_MILK);
                 case 2 -> send(s, signal.ADD_SUGAR);
-                case 3 -> send(s, signal.ADD_BOTH);
+                case 3 ->
+                        {send(s,signal.ADD_MILK);
+                            System.out.println(("milk first"));
+                            try {
+                                s.wait(100);
+                                System.out.println(s.getMessage());
+
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();}
+
+
+                            send(s,signal.ADD_SUGAR);
+                            System.out.println("sugar will be added");
+                        }
+
                 case 4 -> System.out.println("a regular coffee with no additions");
                 default -> System.out.println("unknown command ");
             }
